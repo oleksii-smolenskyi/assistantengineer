@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+//applicationDefaultJvmArgs =["-Xms512m", "-Xmx1024m"] // не працюЇ... ????
+mainClassName = 'views.MainFrame'
+// точка входу
+jar {
+    // упакувати вс≥ л≥би в одну джарку
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes('Main-Class': 'views.MainFrame')
+    }
+}
+
+group 'com.smolenskyi'
+version '1.0'
+
+sourceCompatibility = 1.8
+// ўоб не було кр€коз€бр≥в
+compileJava.options.encoding = 'UTF-8'
+compileJava.options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//tasks.withType(JavaCompile) {
+//    options.encoding = 'UTF-8'
+//}
+
+// локальна тека з б≥бл≥отеками
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    //mavenCentral()
+}
+
+dependencies {
+    //testCompile group: 'junit', name: 'junit', version: '4.12'
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.0'
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.0'
+// https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.0'
+// https://mvnrepository.com/artifact/org.apache.poi/poi
+    compile group: 'org.apache.poi', name: 'poi', version: '4.1.0'
+// https://mvnrepository.com/artifact/org.apache.poi/ooxml-schemas
+    compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.4'
+// https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans
+    compile group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '3.1.0'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-compress
+    compile group: 'org.apache.commons', name: 'commons-compress', version: '1.18'
+// https://mvnrepository.com/artifact/commons-codec/commons-codec
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.13'
+// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.3.1.jre7-preview-v2'
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    // л≥би дл€ роботи з базою .mdb
+// https://mvnrepository.com/artifact/net.sf.ucanaccess/ucanaccess
+    compile group: 'net.sf.ucanaccess', name: 'ucanaccess', version: '4.0.4'
+// https://mvnrepository.com/artifact/org.hsqldb/hsqldb
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
+// https://mvnrepository.com/artifact/com.healthmarketscience.jackcess/jackcess
+    compile group: 'com.healthmarketscience.jackcess', name: 'jackcess', version: '3.0.0'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+// https://mvnrepository.com/artifact/commons-logging/commons-logging
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
+
+
+}

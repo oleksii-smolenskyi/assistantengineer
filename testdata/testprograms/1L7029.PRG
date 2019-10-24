@@ -1,0 +1,243 @@
+Zn:8W7974029
+Ec:28062019
+Zm:TAB010619EE
+Em:
+Rn:
+Rr:Werner.Lederer
+Lk:L0L
+Mm:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Uv:
+Da:16.11.2015
+Tn:
+Vr:8
+Af:
+Bb:
+Mo:
+Bl:
+Gr:
+Kv:0
+Kb:0
+K4:10.00
+K2:70.00
+Ks:10000.00
+Kt:2000
+Co:1
+Cn:3
+Cb:0
+D2:0
+Dv:0
+Tr:0
+Tt:0
+Dt:0
+Hs:0
+Sc:0
+Sn:0
+Sp:0
+Sf:1
+Td:1
+Ts:1
+Te:1
+Pb:1
+Ab:0
+Fo:1
+Rd:1
+Oo:0
+Ct:0
+Of:0
+
+Vb:0
+Vn:1
+St:AC_HZN
+Vq:2,5
+Vf:RTBL
+T1:16
+T2:16
+X1:SLUE
+X2:KS_PFAL_17RT
+Tx:2356
+
+Vb:0
+Vn:2
+St:NONE
+Vq:0,35
+Vf:WS
+T1:15
+T2:1
+X1:KS_PFAL_17RT
+X2:AFSKL
+Tx:2357
+
+Vb:0
+Vn:3
+St:31
+Vq:0,35
+Vf:BR
+T1:1
+T2:2
+X1:SP_MB5_B1
+X2:AFSKL
+Tx:2358
+
+Vb:0
+Vn:4
+St:LIN_AC_12
+Vq:0,35
+Vf:VIWS
+T1:3
+T2:1
+X1:AFSKL
+X2:SP_LIN_AC12_1
+Tx:2359
+
+Vb:0
+Vn:5
+St:LIN_AC_12
+Vq:0,13
+Vf:VIWS
+T1:6
+T2:1
+X1:KS_PFAL_17RT
+X2:SP_LIN_AC12_1
+Tx:2363
+
+Vb:0
+Vn:6
+St:NONE
+Vq:0,35
+Vf:WS
+T1:15
+T2:3
+X1:KS_PFAL_17RT
+X2:DRSK
+Tx:2364
+
+Vb:0
+Vn:7
+St:31
+Vq:0,35
+Vf:BR
+T1:1
+T2:1
+X1:SP_MB1_A2
+X2:DRSK
+Tx:2365
+
+Vb:0
+Vn:8
+St:LIN_AC_12
+Vq:0,35
+Vf:VIWS
+T1:2
+T2:1
+X1:DRSK
+X2:SP_LIN_AC12_1
+Tx:2366
+
+
+Xc:DRSK
+Sg:DRUCKSENSOR KLIMA
+Sb:STECKHUELSENGEHAEUSE_3POL
+Sc:8K0973703
+Sk:3
+Pt:12/0016 - 1
+Pt:12/0016 - 2
+Pt:12/0016 - 3
+
+Xc:SLUE
+Sg:Sicherungstraeger 12-fach
+Sb:SICHERUNGSTRAEGER_12POL_ROT
+Sc:4F1941824B
+Sk:24
+Pt:1
+Pt:1A
+Pt:2
+Pt:2A
+Pt:3
+Pt:3A
+Pt:4
+Pt:4A
+Pt:5
+Pt:5A
+Pt:6
+Pt:6A
+Pt:7
+Pt:7A
+Pt:8
+Pt:8A
+Pt:9
+Pt:9A
+Pt:10
+Pt:10A
+Pt:11
+Pt:11A
+Pt:12
+Pt:12A
+
+Xc:AFSKL
+Sg:Aussenluftfeutesensor
+Sb:BUCHSENGEHAEUSE_3-POL
+Sc:4B0972883
+Sk:3
+Pt:11/0029 - 1
+Pt:11/0029 - 2
+Pt:11/0029 - 3
+
+Xc:SP_MB1_A2
+Sb:Verbinder
+Sc:SPLICE
+Sk:1
+Vt:2
+
+Xc:SP_MB5_B1
+Sb:Verbinder
+Sc:SPLICE
+Sk:1
+Vt:2
+
+Xc:KS_PFAL_17RT
+Sb:STIFTGEHAEUSE_17POL_RT_KOD3
+Sc:4F0972575B
+Sk:17
+Pt:11/0103 - 1
+Pt:11/0103 - 2
+Pt:11/0103 - 3
+Pt:11/0103 - 4
+Pt:11/0103 - 5
+Pt:11/0103 - 6
+Pt:11/0103 - 7
+Pt:11/0103 - 8
+Pt:11/0103 - 9
+Pt:11/0103 - 10
+Pt:11/0103 - 11
+Pt:11/0103 - 12
+Pt:11/0103 - 13
+Pt:11/0103 - 14
+Pt:12/0030 - 15
+Pt:12/0030 - 16
+Pt:12/0030 - 17
+
+Xc:SP_LIN_AC12_1
+Sb:Verbinder
+Sc:SPLICE
+Sk:1
+Vt:2
+
