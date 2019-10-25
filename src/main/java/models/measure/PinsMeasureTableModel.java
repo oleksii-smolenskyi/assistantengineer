@@ -32,6 +32,7 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
     private List<String> tableHeaders = new ArrayList<>(Arrays.asList(new String[]{"Назва столу", "Тест модуль", "Пін", "Виміряне значення", "Сила пружності", "Дата", "Голка", "+ Толеранція %", "- Толеранція %", "Результат"}));
     private IOException exception;
     private Map<Integer, Set<String>> filters = new HashMap<>(); // карта фільтрів таблиці Map<Integer column index, Set<String> items to show>
+    private String statusMessage;
 
 
     /**
@@ -91,6 +92,7 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                statusMessage = "З'єднання з базою даних...";
                 Connection connection = null;
                 Statement statement = null;
                 ResultSet resultSet = null;
@@ -104,10 +106,12 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
                     statement = connection.createStatement();
                     // Step 2.C: Executing SQL and
                     // retrieve data into ResultSet
+                    statusMessage = "Вибірка даних...";
                     resultSet = statement.executeQuery(querySql);
                     List<String> pinMeasureParams;
                     LOGGER.debug("Підключено до файлу і виконано запит на вибірку. Кількість результатів = " + resultSet.getFetchSize());
                     // поки є результати
+                    statusMessage = "Формування результатів...";
                     while (resultSet.next()) {
                         pinMeasureParams = new ArrayList<>();
                         for(int i = 1; i<= PinMeasureModel.PARAMS_COUNT - 1; i++) {
@@ -119,6 +123,7 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
                             LOGGER.error(ioe.getMessage() + " : " + pinMeasureParams);
                         }
                     }
+                    statusMessage = "Готово.";
                     ready = 100;
                     LOGGER.debug("ready = 100");
                 }
@@ -159,13 +164,16 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                statusMessage = "З'єднання з базою даних...";
                 // створюєм конект з базою даних
                 try (Connection conn = connectToDB()){
                     LOGGER.info("З'єднання з базою даних успішно виконано.");
                     Statement statement = conn.createStatement();
+                    statusMessage = "Вибірка даних...";
                     // виконуєм sql запит
                     ResultSet rs = statement.executeQuery(querySql);
                     List<String> pinMeasureParams;
+                    statusMessage = "Формування результатів...";
                     // поки є результати
                     while (rs.next()) {
                         pinMeasureParams = new ArrayList<>();
@@ -178,6 +186,7 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
                             LOGGER.error(ioe.getMessage() + " : " + pinMeasureParams);
                         }
                     }
+                    statusMessage = "Готово.";
                     ready = 100;
                 } catch (SQLException|IOException e) {
                     ready = -1;
@@ -410,4 +419,8 @@ public class PinsMeasureTableModel extends AbstractTableModel implements Progres
         return exception;
     }
 
+    @Override
+    public String getStatusMessage() {
+        return statusMessage;
+    }
 }

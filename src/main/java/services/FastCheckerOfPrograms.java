@@ -11,6 +11,7 @@ public class FastCheckerOfPrograms implements Progressable {
     private boolean checkNotConnectedWire;
     private boolean checkSoftAdapted;
     private boolean checkSpliceAdapted;
+    private String statusMessage;
 
     public FastCheckerOfPrograms(ReaderTestPrograms readerTestPrograms, boolean checkEmptyConnectors, boolean checkNotConnectedWire, boolean checkSoftAdapted, boolean checkSpliceAdapted) {
         this.readerTestPrograms = readerTestPrograms;
@@ -36,6 +37,11 @@ public class FastCheckerOfPrograms implements Progressable {
 
     @Override
     public IOException getStopException() {
+        return null;
+    }
+
+    @Override
+    public String getStatusMessage() {
         return null;
     }
 }

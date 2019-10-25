@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
     // шлях до теки з програмами
     private Path path;
+    private String statusMessage;
 
     // Конструктор класу приймає параметром об'єкт Path, який є шляхом до теки з програмами тестування, які потрібно зчитати
     public ReaderTestProgramsFromFolder(Path path) throws IOException {
@@ -224,5 +225,8 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
             return null;
     }
 
-
+    @Override
+    public String getStatusMessage() {
+        return statusMessage;
+    }
 }

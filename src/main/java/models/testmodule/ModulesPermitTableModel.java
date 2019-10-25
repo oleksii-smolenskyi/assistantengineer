@@ -56,6 +56,7 @@ public class ModulesPermitTableModel extends AbstractTableModel implements Progr
     private IOException exception; // якщо ініціалізація обєкта закінчиться невдало, тут буде збережено виключення на якому спинилась ініціалізація
     private volatile int ready = -1; // чи готовий обЄкт до використання 100 - готовий, -1 - ініціалізація завершилася помилкою(використовувати обєкт далі неможливо) 0 - 99 - обєкт в процесі ініціалізації
     private List<models.Observer> observers = new ArrayList<>();
+    private String statusMessage;
 
     /**
      * Ініціалізує об'єкт, завантажує файл властивостей, зчитує назви файлів з теки допусків, завантажує таблицю з модулями
@@ -301,6 +302,7 @@ public class ModulesPermitTableModel extends AbstractTableModel implements Progr
             List<File> - список файлів допусків до material номеру
         */
     private void loadListFromFolder() {
+        statusMessage = "Завантаження допусків тест. модулів...";
         //String regex = "[0-9]{3}_[0-9]{3}_[0-9]{3}=(\\d|\\D)+(.pdf)|M-[0-9]+=(\\d|\\D)+(.pdf)";
         String regex = AppProperties.getProperty("file_name_regex");
         modulesFilesMap = new HashMap<>();
@@ -336,12 +338,15 @@ public class ModulesPermitTableModel extends AbstractTableModel implements Progr
     private void loadModulesFromXLSX() {
         Thread thread = new Thread(() -> {
             try {
+                statusMessage = "Ініціалізація табельки з тест. модулями...";
                 initXLSXFile(); // ініціалізуємо книгу
                 upReady(50);
                 readHeaders();  // читаєм заголовок
                 upReady(10);
+                statusMessage = "Зчитування модулів з табельки...";
                 readModules();  // читаєм модулі
                 upReady(30);
+                statusMessage = "Готово...";
             } catch (IOException e) {
                 ready = -1;
                 LOGGER.error(e.getMessage());
@@ -528,6 +533,11 @@ public class ModulesPermitTableModel extends AbstractTableModel implements Progr
     private synchronized void upReady(int up) {
         if (ready >= 0)
             ready += up;
+    }
+
+    @Override
+    public String getStatusMessage() {
+        return statusMessage;
     }
 
     /**

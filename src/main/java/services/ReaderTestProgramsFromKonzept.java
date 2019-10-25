@@ -33,5 +33,10 @@ public class ReaderTestProgramsFromKonzept implements Progressable {
         this.fileKonzept = fileKonzept;
     }
 
+    private String statusMessage;
 
+    @Override
+    public String getStatusMessage() {
+        return statusMessage;
+    }
 }

@@ -29,7 +29,8 @@ public class Frames {
         final JDialog dlg = new JDialog(ownerFrame, "Loading data...", true);
         JProgressBar dpb = new JProgressBar(0, 100);
         dlg.add(BorderLayout.CENTER, dpb);
-        dlg.add(BorderLayout.NORTH, new JLabel("Progress..."));
+        JLabel statusLabel = new JLabel("Progress...");
+        dlg.add(BorderLayout.NORTH, statusLabel);
         dlg.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         dlg.setSize(300, 75);
         dlg.setLocationRelativeTo(ownerFrame);
@@ -51,6 +52,7 @@ public class Frames {
             }
             try {
                 Thread.sleep(100);
+                statusLabel.setText("Progress: " + obj.getStatusMessage());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
