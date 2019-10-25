@@ -4,8 +4,8 @@ import models.Progressable;
 import models.testprogram.TestProgram;
 import java.util.List;
 
-// Інтерфейс читача програм тестування
+// Р†РЅС‚РµСЂС„РµР№СЃ С‡РёС‚Р°С‡Р° РїСЂРѕРіСЂР°Рј С‚РµСЃС‚СѓРІР°РЅРЅСЏ
 public interface ReaderTestPrograms extends Progressable {
-    // Повертає список зчитаних програм тестування
+    // РџРѕРІРµСЂС‚Р°С” СЃРїРёСЃРѕРє Р·С‡РёС‚Р°РЅРёС… РїСЂРѕРіСЂР°Рј С‚РµСЃС‚СѓРІР°РЅРЅСЏ
     List<TestProgram> getPrograms();
 }

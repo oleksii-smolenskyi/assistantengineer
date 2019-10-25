@@ -1,18 +1,23 @@
 package models.measure;
 
 import utils.UtilityMethods;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Objects;
 
+// Модель запису виміру тестувальної голки.
 public class PinMeasureModel {
     static final int PARAMS_COUNT = 10;
+    public static final String MEASURED_OK = "OK";
+    public static final String MEASURED_NOK = "nOK";
     private List<String> params;
 
     /**
      *
-     * @param params
+     * @param params    0 - String : Test table; 1 - String : Test module; 2 - Integer : Pin number;
+     *                  3 - Double : measured value; 4 - Double : nominal value; 5 - String : date; 6 - String : pin type;
+     *                 7 - Double : floorTolerance; 8 - Double : ceilTolerance ; 9 - "OK" ||"nOK"
      * @throws IOException
      */
     public PinMeasureModel(List<String> params) throws IOException {
@@ -35,9 +40,9 @@ public class PinMeasureModel {
             }
             // визначаєм чи виміряне значення є в толеранції
             if(nominalValue * (1.0 + ceilTolerance / 100) > measuredValue && nominalValue * (1.0 - floorTolerance / 100) < measuredValue) {
-                this.params.add(9, "OK");
+                this.params.add(9, MEASURED_OK);
             } else {
-                this.params.add(9, "nOK");
+                this.params.add(9, MEASURED_NOK);
             }
             this.params.set(3, measuredValue.toString());
             // опрацьовуєм дату
@@ -62,5 +67,18 @@ public class PinMeasureModel {
         return "PinMeasureModel{" +
                 "params=" + params +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PinMeasureModel that = (PinMeasureModel) o;
+        return Objects.equals(params, that.params);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(params);
     }
 }

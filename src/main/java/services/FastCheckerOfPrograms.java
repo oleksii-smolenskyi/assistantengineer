@@ -4,7 +4,7 @@ import models.Progressable;
 
 import java.io.IOException;
 
-// Клас для забезпечення "швидкої" перевірки тест програми на можливі грубі помилки, допущені при її створенні
+// РљР»Р°СЃ РґР»СЏ Р·Р°Р±РµР·РїРµС‡РµРЅРЅСЏ "С€РІРёРґРєРѕС—" РїРµСЂРµРІС–СЂРєРё С‚РµСЃС‚ РїСЂРѕРіСЂР°РјРё РЅР° РјРѕР¶Р»РёРІС– РіСЂСѓР±С– РїРѕРјРёР»РєРё, РґРѕРїСѓС‰РµРЅС– РїСЂРё С—С— СЃС‚РІРѕСЂРµРЅРЅС–
 public class FastCheckerOfPrograms implements Progressable {
     private ReaderTestPrograms readerTestPrograms;
     private boolean checkEmptyConnectors;

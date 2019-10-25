@@ -72,6 +72,22 @@ dependencies {
     compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
-
-
+// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.5.2'
+// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
+// https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api
+    testCompile  group: 'org.apiguardian', name: 'apiguardian-api', version: '1.1.0'
+// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.5.2'
+// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-commons
+    testCompile group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.5.2'
+// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-engine
+    testCompile group: 'org.junit.platform', name: 'junit-platform-engine', version: '1.5.2'
+// https://mvnrepository.com/artifact/org.opentest4j/opentest4j
+    testCompile group: 'org.opentest4j', name: 'opentest4j', version: '1.2.0'
+    
+}
+test {
+    useJUnitPlatform()
 }

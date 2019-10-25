@@ -3,25 +3,26 @@ package models.testprogram;
 import java.util.List;
 
 public class Connector {
-    public static final int ADAPTED_AS_NEED = 2;
+    public static final int ADAPTED_AS_NEED = 0;
     public static final int ADAPTED_CHECKED = 1;
-    public static final int ADAPTED_NOT_CHECKED = 0;
+    public static final int ADAPTED_NOT_CHECKED = 2;
 
-    String connectorName;
-    String description;
-    String connectorNr;
-    int pinsCount;
-    int adapted;
-    List<String> pinsText;
+    private String xCode;
+    private String description;
+    private String connectorNr;
+    private int pinsCount;
+    private int adapted;
+    private List<String> pinsText;
 
-    public Connector(String connectorName, String description, String conectorCode, int pinsCount) {
-        this.connectorName = connectorName;
+    public Connector(String xCode, String description, String conectorCode, int pinsCount, int adapted) {
+        this.xCode = xCode;
         this.description = description;
         this.connectorNr = conectorCode;
         this.pinsCount = pinsCount;
+        setAdapted(adapted);
     }
 
-    // метод задання об'єкту "Конектор" списку пінтекстів
+    // РјРµС‚РѕРґ Р·Р°РґР°РЅРЅСЏ РѕР±'С”РєС‚Сѓ "РљРѕРЅРµРєС‚РѕСЂ" СЃРїРёСЃРєСѓ РїС–РЅС‚РµРєСЃС‚С–РІ
     public void setPinsText(List<String> pinsText) {
         this.pinsText = pinsText;
     }
@@ -31,7 +32,7 @@ public class Connector {
     }
 
     public void setAdapted(int adapted) {
-        if(pinsCount < 2 && (adapted < 0 || adapted > 2)) {
+        if(pinsCount < 2 && pinsCount >= 0 && (adapted < 0 || adapted > 2)) {
             this.adapted = ADAPTED_CHECKED;
             return;
         }
@@ -41,7 +42,7 @@ public class Connector {
     @Override
     public String toString() {
         return "Connector{" +
-                "connectorName='" + connectorName + '\'' +
+                "xCode='" + xCode + '\'' +
                 ", description='" + description + '\'' +
                 ", connectorNr='" + connectorNr + '\'' +
                 ", pinsCount=" + pinsCount +
