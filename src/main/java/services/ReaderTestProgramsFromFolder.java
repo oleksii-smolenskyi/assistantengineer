@@ -3,7 +3,6 @@ package services;
 import models.testprogram.Connector;
 import models.testprogram.TestProgram;
 import models.testprogram.Wire;
-
 import java.io.*;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -27,7 +26,9 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
         // перевіряємо чи існує такий шлях
         if (!Files.exists(path))
             throw new IOException("Шлях " + path + " не існує.");
-        // TODO перевірку чи вхідний шлях є текою
+        // перевіряємо чи є текою
+        if (!Files.isDirectory(path))
+            throw new IOException("Шлях " + path + " не є текою.");
         this.path = path;
         loadPrograms(); // зчитуєм програми тестування
     }
@@ -45,13 +46,19 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
             @Override
             public void run() {
                 try {
+                    statusMessage = "Зчитування програм...";
                     // здійснюється прохід по файлам, що знаходяться в теці
                     Files.walkFileTree(path, new SimpleFileVisitor(){
                         @Override
                         public FileVisitResult visitFile(Object file, BasicFileAttributes attrs) throws IOException {
                             System.out.println(file);
-                            if(file.toString().toLowerCase().endsWith("prg")) {
-                                readedPrograms.add(loadTestProgramFromFile(new File(file.toString())));
+                            try {
+                                if(file.toString().toLowerCase().endsWith("prg") || file.toString().toLowerCase().endsWith("ord")) {
+                                    readedPrograms.add(loadTestProgramFromFile(new File(file.toString())));
+                                }
+                            } catch (IOException ioe) {
+                                failedList.add(file.toString());
+                                throw new IOException(ioe.getMessage());
                             }
                             return super.visitFile(file, attrs);
                         }
@@ -66,6 +73,7 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
                     stopException = e;
                     ready = -1;
                 }
+                statusMessage = "Готово.";
                 ready = 100;
             }
         };
@@ -73,22 +81,14 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
         Thread threadTask = new Thread(task);
         threadTask.setDaemon(true);
         threadTask.start();
-
-        // TODO СТЕРТИ ЦЕЙ КУСОК ПІСЛЯ ВІДЛАДКИ
-        while(threadTask.isAlive()) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        for(TestProgram testProgram : readedPrograms) {
-            System.out.println(testProgram);
-        }
-        System.out.println("count programs: " + readedPrograms.size());
-        // КІНЕЦЬ СТИРАННЯ
     }
 
+    /**
+     * Завантажує програму тестування з файлу.
+     * @param file
+     * @return
+     * @throws IOException
+     */
     public static TestProgram loadTestProgramFromFile(File file) throws IOException {
         if(Objects.isNull(file))
             throw new IOException("Не заданий файл.");
@@ -175,7 +175,7 @@ public class ReaderTestProgramsFromFolder implements ReaderTestPrograms {
         } catch (FileNotFoundException e) {
             throw new IOException("Файл " + file + " не знайдено.");
         } catch (IOException e) {
-            throw new IOException("Помилка читання файлу: " + file);
+            throw new IOException("Помилка читання файлу: " + file + (lineId.get() > 0 ? " рядок: " + lineId.get() : ""));
         }
     }
 

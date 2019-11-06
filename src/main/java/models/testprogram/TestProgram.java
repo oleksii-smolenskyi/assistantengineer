@@ -86,7 +86,7 @@ public class TestProgram {
 
     @Override
     public String toString() {
-        return "TestProgram{" +
+        return "\nTestProgram{" +
                 "prgName='" + prgName + '\'' +
                 ", drawingDateOfProgram='" + drawingDateOfProgram + '\'' +
                 ", drawingOfProgram='" + drawingOfProgram + '\'' +

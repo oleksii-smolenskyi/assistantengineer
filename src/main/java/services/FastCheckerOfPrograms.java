@@ -1,8 +1,10 @@
 package services;
 
 import models.Progressable;
+import models.testprogram.TestProgram;
 
 import java.io.IOException;
+import java.util.List;
 
 // Клас для забезпечення "швидкої" перевірки тест програми на можливі грубі помилки, допущені при її створенні
 public class FastCheckerOfPrograms implements Progressable {
@@ -13,7 +15,9 @@ public class FastCheckerOfPrograms implements Progressable {
     private boolean checkSpliceAdapted;
     private String statusMessage;
 
-    public FastCheckerOfPrograms(ReaderTestPrograms readerTestPrograms, boolean checkEmptyConnectors, boolean checkNotConnectedWire, boolean checkSoftAdapted, boolean checkSpliceAdapted) {
+
+    public FastCheckerOfPrograms(ReaderTestPrograms readerTestPrograms, boolean checkEmptyConnectors,
+                                 boolean checkNotConnectedWire, boolean checkSoftAdapted, boolean checkSpliceAdapted) {
         this.readerTestPrograms = readerTestPrograms;
         this.checkEmptyConnectors = checkEmptyConnectors;
         this.checkNotConnectedWire = checkNotConnectedWire;
@@ -22,7 +26,20 @@ public class FastCheckerOfPrograms implements Progressable {
         checkPrograms();
     }
 
+    // Перевіряє програми по заданим параметрам
     private void checkPrograms() {
+        while(!readerTestPrograms.isReady()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        List<TestProgram> programs = readerTestPrograms.getPrograms();
+        for(TestProgram program : programs) {
+            // TODO checking programs
+            System.out.println(program.getPrgName());
+        }
     }
 
     @Override
@@ -35,13 +52,16 @@ public class FastCheckerOfPrograms implements Progressable {
         return false;
     }
 
+    // Змінна в якій буде зберігатися IOException, якщо такий виникне під час ініціалізації чи роботи об'єкта читача тест. програм
+    private IOException stopException;
+
     @Override
     public IOException getStopException() {
-        return null;
+        return stopException;
     }
 
     @Override
     public String getStatusMessage() {
-        return null;
+        return statusMessage;
     }
 }
